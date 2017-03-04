@@ -1,0 +1,51 @@
+version: "3"
+networks:
+  zk_network:
+    driver: overlay
+services:
+  zk_1:
+    image: sampathmethuku/zookeeper-cluster    
+    ports:
+      - '2181'
+      - '2888'
+      - '3888'
+    volumes:
+      - /var/lib/zookeeper
+      - /var/log/zookeeper
+    command: zk_1,zk_2,zk_3 1
+    env_file: envfile    
+    networks:
+       zk_network:
+         aliases :
+           - zk_1
+  zk_2:
+    image: sampathmethuku/zookeeper-cluster    
+    ports:
+      - '2181'
+      - '2888'
+      - '3888'
+    volumes:
+      - /var/lib/zookeeper
+      - /var/log/zookeeper
+    command: zk_1,zk_2,zk_3  2
+    env_file: envfile    
+    networks:
+       zk_network:
+         aliases :
+           - zk_2
+  zk_3:
+    image: sampathmethuku/zookeeper-cluster     
+    ports:
+      - '2181'
+      - '2888'
+      - '3888'
+    volumes:
+      - /var/lib/zookeeper
+      - /var/log/zookeeper
+    command: zk_1,zk_2,zk_3  3
+    env_file: envfile    
+    networks:
+       zk_network:
+         aliases :
+           - zk_3
+

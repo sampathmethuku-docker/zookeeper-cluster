@@ -1,0 +1,2 @@
+http_proxy=http://www-proxy.us.oracle.com:80
+https_proxy=http://www-proxy.us.oracle.com:80
